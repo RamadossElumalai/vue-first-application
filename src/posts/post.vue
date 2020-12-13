@@ -8,7 +8,7 @@
     <label>Body</label>
     <input type="text" id="body" v-model="post.body">
   </div>
-  <button type="button" @click="onSubmit()">Save</button>
+  <button type="button" class="btn btn-primary" @click="onSubmit()">Save</button>
 </div>
 </template>
 
@@ -27,18 +27,5 @@ export default class PostList extends Vue {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+@import'~bootstrap/dist/css/bootstrap.css'
 </style>
