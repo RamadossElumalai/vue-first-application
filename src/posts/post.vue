@@ -1,14 +1,19 @@
 <template>
-<div>
-  <div>
-    <label>Title</label>
-    <input type="text" id="title" v-model="post.title">
-  </div>
-  <div>
-    <label>Body</label>
-    <input type="text" id="body" v-model="post.body">
-  </div>
-  <button type="button" class="btn btn-primary" @click="onSubmit()">Save</button>
+<div style="margin-left:250px;margin-top:50px;width:500px">
+        <h2>Register</h2>
+        <form @submit.prevent="onSubmit()">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" v-model="post.title"  name="title" class="form-control" :class="{ 'is-invalid': !titleIsValid }" />
+            </div>
+            <div class="form-group">
+                <label for="title">Body</label>
+                <input type="text" v-model="post.body"  name="body" class="form-control" :class="{ 'is-invalid': !bodyIsValid }" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Register</button>
+            </div>
+        </form>
 </div>
 </template>
 
@@ -17,10 +22,38 @@ import { Vue } from 'vue-class-component'
 import Service from '../services/service'
 import { Post } from '../posts/post'
 export default class PostList extends Vue {
+  errors: string [] =[]
   post: Post = {}
+  formIsValid = false
+  titleIsValid = false
+  bodyIsValid = false
   onSubmit () {
     console.log(this.post)
-    alert('button submitted')
+    if (this.post.title) {
+      this.titleIsValid = true
+    } else {
+      this.titleIsValid = false
+    }
+
+    if (this.post.body) {
+      this.bodyIsValid = true
+    } else {
+      this.bodyIsValid = false
+    }
+
+    if (this.post.title && this.post.body) {
+      this.formIsValid = true
+      this.titleIsValid = true
+      this.bodyIsValid = true
+      this.post.userId = '1'
+      Service.addPost(this.post).then((respose) => {
+        if (respose.status === 201) {
+          alert('Successfully added')
+          console.log(respose)
+          this.$router.push({ name: 'post-list' })
+        }
+      })
+    }
   }
 }
 </script>

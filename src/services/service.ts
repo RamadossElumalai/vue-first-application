@@ -1,3 +1,4 @@
+import { Post } from './../posts/post'
 import http from '../http-common'
 
 class Service {
@@ -7,6 +8,10 @@ class Service {
 
   getComments (postId: string) {
     return http.get(`posts/${postId}/comments`)
+  }
+
+  addPost (post: Post) {
+    return http.post('posts', post)
   }
 }
 export default new Service()
