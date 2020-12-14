@@ -1,6 +1,6 @@
 <template>
 <div style="margin-left:250px;margin-top:50px;width:500px">
-        <h2>Register</h2>
+        <h2>Add Post</h2>
         <form @submit.prevent="onSubmit()">
             <div class="form-group">
                 <label for="title">Title</label>
